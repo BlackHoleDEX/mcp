@@ -1,6 +1,6 @@
 # Blackhole MCP Server
 
-Model Context Protocol server for the Blackhole DEX on Avalanche. Provides 32 tools for swaps, liquidity, CL positions, voting, locks, gauges, bribes, yield queries, vote leaderboard, epoch state, allowances, pool status, risk flags, and transaction execution.
+Model Context Protocol server for the Blackhole DEX on Avalanche. Provides 48 tools for swaps, liquidity, CL positions, zaps, voting, locks, gauges, bribes, portfolio queries, pool analytics, gas estimation, and transaction execution.
 
 ## Tools
 
@@ -8,16 +8,19 @@ Model Context Protocol server for the Blackhole DEX on Avalanche. Provides 32 to
 |---|---|
 | **Swap** | `swap_steps`, `quote` |
 | **Liquidity (V2)** | `add_liquidity_steps`, `remove_liquidity_steps`, `withdraw_liquidity_steps` |
-| **Liquidity (CL)** | `add_liquidity_cl_steps` |
+| **Liquidity (CL)** | `add_liquidity_cl_steps`, `create_cl_pool_steps` |
+| **Deposit math** | `get_deposit_amounts` |
 | **Zap** | `zap_add_liquidity_steps`, `zap_mint_cl_steps`, `zap_increase_liquidity_steps`, `zap_remove_liquidity_steps`, `zap_split_plan` |
 | **Staking** | `stake_liquidity_steps`, `unstake_liquidity_steps` |
-| **Fees & Emissions** | `claim_fees_steps`, `claim_emissions_steps`, `claim_voting_rewards_steps`, `claim_voting_rewards_payload` |
+| **Fees & Emissions** | `claim_fees_steps`, `claim_emissions_steps`, `claim_rebase_steps`, `claim_voting_rewards_steps`, `claim_voting_rewards_payload` |
 | **Locks (veNFT)** | `create_lock_steps`, `increase_lock_steps`, `merge_lock_steps`, `lock_advanced_steps` |
-| **Voting** | `vote_steps`, `vote_leaderboard` |
+| **Voting** | `vote_steps`, `get_lock_vote_state`, `vote_leaderboard` |
 | **Epoch** | `get_epoch_state` |
 | **Gauges & Bribes** | `create_gauge_steps`, `add_bribes_steps` |
-| **Pools** | `create_cl_pool_steps`, `pool_yield` |
-| **Operational / Safety** | `get_allowances`, `get_pool_status`, `get_opportunities` |
+| **Portfolio & discovery** | `resolve_address`, `get_token_balances`, `get_user_positions`, `get_user_locks`, `get_whitelisted_tokens`, `get_opportunities` |
+| **Pools, yield & ALM** | `pool_yield`, `get_pool_status`, `get_pool_lp_providers`, `get_alm_vaults`, `get_tokenomics` |
+| **CL math & simulation** | `cl_tick_to_price`, `cl_price_to_tick`, `cl_position_detail`, `cl_apr_simulator` |
+| **Operational / Safety** | `get_allowances`, `estimate_gas_and_tx_cost` |
 | **Execution** | `execute_transactions` |
 
 ## Installation
