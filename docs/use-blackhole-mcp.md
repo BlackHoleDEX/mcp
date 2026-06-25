@@ -1,6 +1,6 @@
 # How to use Blackhole MCP
 
-Blackhole MCP is a [Model Context Protocol](https://modelcontextprotocol.io/) server for Blackhole DEX on Avalanche. It exposes **46 tools** so AI agents can quote swaps, plan liquidity and zaps, manage veNFT locks and votes, claim rewards, inspect pool and portfolio state, estimate gas, and optionally broadcast prepared transactions.
+Blackhole MCP is a [Model Context Protocol](https://modelcontextprotocol.io/) server for Blackhole DEX on Avalanche. It exposes **48 tools** so AI agents can quote swaps, plan liquidity and zaps, manage veNFT locks and votes, claim rewards, inspect pool and portfolio state, estimate gas, and optionally broadcast prepared transactions.
 
 Supported clients include **Cursor**, **Claude Desktop / Claude Code**, **Codex**, and any MCP host that runs stdio servers. You can also embed the server in your own Node app via `createMcpServer()`.
 
@@ -217,7 +217,7 @@ Step tools return compact `{ to, data, value }` payloads by default. Pass `mcp_d
 
 - "After I approve these exact steps, broadcast the prepared transactions to Avalanche with confirm."
 
-## Tools (46)
+## Tools (48)
 
 ### Trading
 
@@ -240,6 +240,12 @@ Step tools return compact `{ to, data, value }` payloads by default. Pass `mcp_d
 | --- | --- |
 | `add_liquidity_cl_steps` | Add or adjust CL position via NFPM. |
 | `create_cl_pool_steps` | Deploy a new CL pool via custom pool deployer. |
+
+### Deposit math
+
+| Tool | Purpose |
+| --- | --- |
+| `get_deposit_amounts` | Given one token amount, compute the paired amount needed for V2 or CL liquidity entry. |
 
 ### Zaps
 
@@ -264,6 +270,7 @@ Step tools return compact `{ to, data, value }` payloads by default. Pass `mcp_d
 | --- | --- |
 | `claim_fees_steps` | Claim trading fees |
 | `claim_emissions_steps` | Claim gauge emissions. |
+| `claim_rebase_steps` | Claim veNFT rebase (anti-dilution) rewards from RewardsDistributor. |
 | `claim_voting_rewards_steps` | Claim voting/bribe rewards (step builder). |
 | `claim_voting_rewards_payload` | Fetch veNFT API rewards and build `claimBribes` payload. |
 
@@ -335,7 +342,7 @@ Step tools return compact `{ to, data, value }` payloads by default. Pass `mcp_d
 | --- | --- |
 | `execute_transactions` | Sign and broadcast prepared transactions to Avalanche C-Chain when `PRIVATE_KEY` is set and `confirm: true`. |
 
-> **LP vs voter yield:** Use `pool_yield` and `apr` when the user supplies **liquidity**. Use `vote_leaderboard` and **vAPR** when the user **locks BLACK** and allocates **vote weight** — voter rewards divide by vote weight on the gauge, not pool TVL.
+> **LP vs voter yield:** Use `pool_yield` and `cl_apr_simulator` when the user supplies **liquidity**. Use `vote_leaderboard` and **vAPR** when the user **locks BLACK** and allocates **vote weight** — voter rewards divide by vote weight on the gauge, not pool TVL.
 
 ## Optional environment variables
 
